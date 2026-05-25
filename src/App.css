@@ -484,9 +484,7 @@
 }
 
 .sp-trailer-wrapper {
-  position: absolute;
-  bottom: 50px;
-  left: 250px; /* Align with main info */
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -779,5 +777,109 @@
     left: 0 !important;
     transform: none !important;
     margin-bottom: 15px;
+  }
+}
+
+/* SHORT SCREEN RESPONSIVENESS */
+@media (max-height: 800px) {
+  .sp-main-info {
+    margin-top: -60px;
+  }
+  .sp-title {
+    font-size: 3.5rem;
+    margin-bottom: 10px;
+  }
+  .sp-desc {
+    font-size: 0.8rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+  }
+  .sp-trailer-wrapper {
+    transform: scale(0.85);
+    transform-origin: left center;
+  }
+  .scroll-indicator {
+    bottom: 5px;
+    transform: translateX(-50%) scale(0.8);
+  }
+  .fp-title-overlay {
+    top: 15%;
+    font-size: 5rem;
+  }
+  .fp-episodes-carousel {
+    bottom: 15px;
+    transform: scale(0.9);
+    transform-origin: bottom left;
+  }
+  .actor-name-title {
+    font-size: 3.5rem !important;
+    margin-bottom: 5px !important;
+  }
+  .actor-role-title {
+    font-size: 1.5rem !important;
+    margin-bottom: 15px !important;
+  }
+  .actor-bio-text {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+  }
+  .about-subtitle {
+    font-size: 1rem !important;
+    margin-bottom: 5px !important;
+  }
+  .about-title {
+    font-size: 3.5rem !important;
+    margin-bottom: 15px !important;
+  }
+  .about-desc {
+    font-size: 0.95rem !important;
+    line-height: 1.5 !important;
+    margin-bottom: 20px !important;
+  }
+  .about-grid {
+    gap: 15px !important;
+  }
+}
+
+@media (max-height: 650px) {
+  .sp-main-info {
+    margin-top: -80px;
+  }
+  .sp-title {
+    font-size: 2.8rem;
+  }
+  .sp-trailer-wrapper {
+    transform: scale(0.75);
+    transform-origin: left center;
+  }
+  .scroll-indicator {
+    display: none;
+  }
+  .actor-name-title {
+    font-size: 2.8rem !important;
+  }
+  .actor-role-title {
+    font-size: 1.2rem !important;
+    margin-bottom: 10px !important;
+  }
+  .actor-bio-text {
+    font-size: 0.85rem !important;
+    line-height: 1.4 !important;
+  }
+  .about-subtitle {
+    font-size: 0.8rem !important;
+    margin-bottom: 5px !important;
+  }
+  .about-title {
+    font-size: 2.8rem !important;
+    margin-bottom: 10px !important;
+  }
+  .about-desc {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 15px !important;
+  }
+  .about-grid {
+    gap: 10px !important;
   }
 }

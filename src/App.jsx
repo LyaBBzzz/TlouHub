@@ -790,34 +790,36 @@ function SecondPage({ setActiveTab, setTrailerOpen, setSearchOpen, activeId, set
           <p className="sp-desc">
             {activeEpisode.desc}
           </p>
-          <button className="sp-learn-more" onClick={() => setActiveTab('about')}>
-            LEARN MORE <ChevronRight size={16} color="var(--accent-color)" />
-          </button>
-        </div>
-
-        <div className="sp-trailer-wrapper" style={{ zIndex: 10 }}>
-          <div className="sp-trailer-text">Watch full</div>
-          <div className="sp-trailer-box" style={{ position: 'relative' }} onClick={() => setTrailerOpen(true)}>
-            {episodesData.map(ep => (
-              <img loading="lazy" 
-                key={`trailer-${ep.id}`}
-                src={ep.trailerImage} 
-                alt="Trailer Thumbnail"
-                style={{
-                  opacity: activeEpisode.id === ep.id ? 1 : 0,
-                  transition: 'opacity 1s ease-in-out',
-                  position: 'absolute',
-                  top: 0,
-                  left: 0,
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover'
-                }}
-              />
-            ))}
-            <div className="sp-trailer-overlay">
-              <div className="sp-trailer-play">
-                <Play size={20} fill="white" />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: '20px' }}>
+            <button className="sp-learn-more" onClick={() => setActiveTab('about')}>
+              LEARN MORE <ChevronRight size={16} color="var(--accent-color)" />
+            </button>
+            
+            <div className="sp-trailer-wrapper" style={{ zIndex: 10 }}>
+              <div className="sp-trailer-text">Watch full</div>
+              <div className="sp-trailer-box" style={{ position: 'relative' }} onClick={() => setTrailerOpen(true)}>
+                {episodesData.map(ep => (
+                  <img loading="lazy" 
+                    key={`trailer-${ep.id}`}
+                    src={ep.trailerImage} 
+                    alt="Trailer Thumbnail"
+                    style={{
+                      opacity: activeEpisode.id === ep.id ? 1 : 0,
+                      transition: 'opacity 1s ease-in-out',
+                      position: 'absolute',
+                      top: 0,
+                      left: 0,
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover'
+                    }}
+                  />
+                ))}
+                <div className="sp-trailer-overlay">
+                  <div className="sp-trailer-play">
+                    <Play size={20} fill="white" />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -925,7 +927,7 @@ function SeasonsPage({ setActiveTab, setSearchOpen }) {
               />
               
               <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '40px', background: 'linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0) 100%)' }}>
-                <div style={{ width: '600px', maxWidth: '90vw' }}>
+                <div style={{ width: '100%', maxWidth: '600px' }}>
                   <div style={{ color: 'var(--accent-color)', fontSize: '0.9rem', letterSpacing: '2px', marginBottom: '10px', fontWeight: 'bold' }}>
                     {season.status}
                   </div>
@@ -1061,9 +1063,9 @@ function ActorsPage({ setActiveTab, setSearchOpen }) {
                 }}
               >
                 <div style={{ color: 'var(--accent-color)', fontSize: '1.2rem', letterSpacing: '4px', marginBottom: '10px', fontWeight: 'bold' }}>THE CAST</div>
-                <h1 className="oswald-font" style={{ fontSize: '5rem', color: 'white', lineHeight: '1.1', marginBottom: '10px' }}>{actor.name}</h1>
-                <h2 className="oswald-font" style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.8)', marginBottom: '30px' }}>AS {actor.role}</h2>
-                <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem', lineHeight: '1.8', maxWidth: '600px', borderLeft: '4px solid var(--accent-color)', paddingLeft: '20px' }}>
+                <h1 className="oswald-font actor-name-title" style={{ fontSize: '5rem', color: 'white', lineHeight: '1.1', marginBottom: '10px' }}>{actor.name}</h1>
+                <h2 className="oswald-font actor-role-title" style={{ fontSize: '2rem', color: 'rgba(255,255,255,0.8)', marginBottom: '30px' }}>AS {actor.role}</h2>
+                <p className="actor-bio-text" style={{ color: 'var(--text-muted)', fontSize: '1.2rem', lineHeight: '1.8', maxWidth: '600px', borderLeft: '4px solid var(--accent-color)', paddingLeft: '20px' }}>
                   {actor.bio}
                 </p>
               </div>
@@ -1116,15 +1118,15 @@ function AboutPage({ setActiveTab, setSearchOpen }) {
         
         {/* Left Side: Text and Info */}
         <div style={{ flex: '1', paddingRight: '60px', zIndex: 10, animation: 'fadeInUp 0.8s ease' }}>
-          <div style={{ color: 'var(--accent-color)', fontSize: '1.2rem', letterSpacing: '4px', marginBottom: '10px', fontWeight: 'bold' }}>THE SERIES</div>
-          <h1 className="oswald-font" style={{ fontSize: '5rem', color: 'white', lineHeight: '1', marginBottom: '30px', textShadow: '2px 2px 15px rgba(0,0,0,0.8)' }}>
+          <div className="about-subtitle" style={{ color: 'var(--accent-color)', fontSize: '1.2rem', letterSpacing: '4px', marginBottom: '10px', fontWeight: 'bold' }}>THE SERIES</div>
+          <h1 className="oswald-font about-title" style={{ fontSize: '5rem', color: 'white', lineHeight: '1', marginBottom: '30px', textShadow: '2px 2px 15px rgba(0,0,0,0.8)' }}>
             ABOUT THE SHOW
           </h1>
-          <p style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '40px', maxWidth: '600px' }}>
+          <p className="about-desc" style={{ color: 'rgba(255,255,255,0.85)', fontSize: '1.2rem', lineHeight: '1.8', marginBottom: '40px', maxWidth: '600px' }}>
             Based on the critically acclaimed video game, The Last of Us takes place 20 years after modern civilization has been destroyed. Joel, a hardened survivor, is hired to smuggle Ellie, a 14-year-old girl, out of an oppressive quarantine zone. What starts as a small job soon becomes a brutal and heartbreaking journey across the U.S.
           </p>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
+          <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '30px' }}>
             <div style={{ borderLeft: '3px solid var(--accent-color)', paddingLeft: '15px' }}>
               <div style={{ color: 'var(--text-muted)', fontSize: '0.8rem', letterSpacing: '2px', marginBottom: '5px' }}>CREATORS</div>
               <div style={{ color: 'white', fontSize: '1.1rem', fontWeight: 'bold' }}>Craig Mazin<br/>Neil Druckmann</div>
@@ -1199,7 +1201,7 @@ function AboutPage({ setActiveTab, setSearchOpen }) {
         <ChevronDown size={24} className="bounce-animation" />
       </div>
 
-      <div style={{ position: 'absolute', bottom: '20px', right: '30px', color: 'rgba(255,255,255,0.15)', fontSize: '0.65rem', letterSpacing: '1px', textAlign: 'right', pointerEvents: 'none', fontFamily: 'Inter, sans-serif', zIndex: 5 }}>
+      <div style={{ position: 'absolute', bottom: '20px', left: '30px', color: 'rgba(255,255,255,0.15)', fontSize: '0.65rem', letterSpacing: '1px', textAlign: 'left', pointerEvents: 'none', fontFamily: 'Inter, sans-serif', zIndex: 5 }}>
         Site was created for demonstration purposes.<br/>
         Designed and developed by <span style={{ color: 'var(--accent-color)', opacity: 0.5 }}>Klimanov D.</span>
       </div>
