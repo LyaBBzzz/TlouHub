@@ -6,7 +6,16 @@ function NavigationBar({ activeTab, setActiveTab, setSearchOpen }) {
   return (
     <nav className="sp-nav">
       <div className="sp-nav-left">
-        <div className="sp-logo">TLOUtube</div>
+        <div 
+          className="sp-logo" 
+          style={{ cursor: 'pointer' }} 
+          onClick={() => {
+            setActiveTab('episodes');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+        >
+          TLOUtube
+        </div>
       </div>
       <div className="sp-nav-links">
         <button className={activeTab === 'episodes' ? 'active' : ''} onClick={() => setActiveTab('episodes')}>EPISODES</button>
