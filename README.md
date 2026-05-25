@@ -1,16 +1,31 @@
-# React + Vite
+# TlouHub | Klimanov D.
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Технологический стек
 
-Currently, two official plugins are available:
+* **React (JSX)**: Компонентная архитектура, хуки для управления состоянием, динамический рендеринг интерфейса.
+* **CSS3**: CSS-переменные (Custom Properties), Flexbox/Grid layouts, медиазапросы, CSS-трансформации и аппаратное ускорение.
+* **Vite**: Быстрая сборка проекта, горячая перезагрузка (HMR) для оптимизации процесса разработки.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Как запустить локально
 
-## React Compiler
+Для запуска проекта локально выполните следующие шаги:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+1. Скачать проект на свой компьютер.
+2. Открыть терминал в папке с проектом и выполнить команду `npm install` для установки зависимостей.
+3. Запустить локальный сервер командой `npm run dev`.
 
-## Expanding the ESLint configuration
+## Структура проекта
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```text
+TlouHub
+├── index.html         # Главная страница (шаблон)
+├── src/
+│   ├── main.jsx       # Точка входа React
+│   ├── App.jsx        # Главный компонент (логика и разметка)
+│   ├── App.css        # Стили компонентов и адаптив
+│   ├── index.css      # Глобальные стили
+│   └── assets/        # Медиафайлы
+├── package.json       # Зависимости и скрипты
+└── vite.config.js     # Конфигурация Vite
+```
+
