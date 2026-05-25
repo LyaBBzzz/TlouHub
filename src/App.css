@@ -53,6 +53,8 @@
   font-size: 0.85rem;
   font-weight: 600;
   letter-spacing: 1px;
+  align-items: center;
+  white-space: nowrap;
 }
 
 .fp-nav-links .active {
@@ -659,6 +661,47 @@
 
 .spin-animation {
   animation: spin 1s linear infinite;
+}
+
+/* MOBILE BLOCKER */
+.mobile-blocker {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--bg-dark);
+  z-index: 9999999;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.mobile-blocker h1 {
+  font-family: 'Oswald', sans-serif;
+  font-size: 4rem;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  line-height: 1;
+}
+
+.mobile-blocker p {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+  .mobile-blocker {
+    display: flex;
+  }
+  .app-container {
+    display: none !important;
+  }
 }
 
 /* MOBILE RESPONSIVENESS */

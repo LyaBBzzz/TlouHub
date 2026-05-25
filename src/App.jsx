@@ -1321,8 +1321,13 @@ function App() {
   }, []);
 
   return (
-    <div className="app-container">
-      {/* Loading Screen */}
+    <>
+      <div className="mobile-blocker">
+        <h1>DESKTOP ONLY</h1>
+        <p>This experience is designed exclusively for desktop and laptop screens.<br/>Please open the site on a larger device.</p>
+      </div>
+      <div className="app-container">
+        {/* Loading Screen */}
       <div style={{
         position: 'fixed', top: 0, left: 0, width: '100%', height: '100%',
         backgroundColor: 'black', zIndex: 99999,
@@ -1387,6 +1392,7 @@ function App() {
       <FirstPage setActiveTab={setActiveTab} setSearchOpen={setSearchOpen} setActiveEpisodeId={setActiveEpisodeId} />
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </div>
+    </>
   );
 }
 
