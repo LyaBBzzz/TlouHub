@@ -11,7 +11,9 @@ function NavigationBar({ activeTab, setActiveTab, setSearchOpen }) {
           style={{ cursor: 'pointer' }} 
           onClick={() => {
             setActiveTab('episodes');
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const topElem = document.querySelector('.page-container.second-page');
+            if (topElem) topElem.scrollIntoView({ behavior: 'smooth' });
+            else window.scrollTo({ top: 0, behavior: 'smooth' });
           }}
         >
           TLOUtube
@@ -30,7 +32,7 @@ function NavigationBar({ activeTab, setActiveTab, setSearchOpen }) {
   );
 }
 
-function FirstPage({ setActiveTab, setSearchOpen }) {
+function FirstPage({ setActiveTab, setSearchOpen, setActiveEpisodeId }) {
   const carouselRef = useRef(null);
   const [fpTab, setFpTab] = useState('about');
 
@@ -233,7 +235,15 @@ function FirstPage({ setActiveTab, setSearchOpen }) {
                 { id: 7, title: 'STRINGS', ext: 'png' },
                 { id: 8, title: 'FLOODED CITY', ext: 'png' },
               ].map((ep) => (
-                <div className="fp-card" key={ep.id}>
+                <div 
+                  className="fp-card" 
+                  key={ep.id} 
+                  style={{ cursor: 'pointer' }} 
+                  onClick={() => { 
+                    setActiveEpisodeId(ep.id); 
+                    scrollToTop('episodes');
+                  }}
+                >
                   <img loading="lazy" src={`/images/1page/episode${ep.id}.${ep.ext}`} alt={`Episode ${ep.id}`} />
                   <span className="fp-card-number">{String(ep.id).padStart(2, '0')}</span>
                   <div className="fp-card-info">
@@ -329,6 +339,15 @@ function FirstPage({ setActiveTab, setSearchOpen }) {
              <img loading="lazy" key={`bg-gal-${index}`} src={img} alt="" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', opacity: galleryIndex === index ? 1 : 0, filter: 'blur(20px) brightness(0.3)', transition: 'all 1s ease', pointerEvents: 'none' }} />
           ))}
           <div style={{ position: 'relative', width: '100%', height: '400px', display: 'flex', justifyContent: 'center', alignItems: 'center', perspective: '1200px' }}>
+            <div 
+              onClick={() => setGalleryIndex((galleryIndex - 1 + galleryImages.length) % galleryImages.length)} 
+              style={{ position: 'absolute', left: '20px', zIndex: 110, width: '40px', height: '40px', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', transition: 'all 0.3s' }}
+              onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--accent-color)'; e.currentTarget.style.color = 'black'; }}
+              onMouseOut={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'white'; }}
+            >
+              <ChevronLeft size={24} />
+            </div>
+
             {galleryImages.map((img, index) => {
               let offset = index - galleryIndex;
               const n = galleryImages.length;
@@ -362,6 +381,15 @@ function FirstPage({ setActiveTab, setSearchOpen }) {
                 </div>
               );
             })}
+
+            <div 
+              onClick={() => setGalleryIndex((galleryIndex + 1) % galleryImages.length)} 
+              style={{ position: 'absolute', right: '20px', zIndex: 110, width: '40px', height: '40px', backgroundColor: 'rgba(255,255,255,0.1)', borderRadius: '50%', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.2)', backdropFilter: 'blur(5px)', transition: 'all 0.3s' }}
+              onMouseOver={e => { e.currentTarget.style.backgroundColor = 'var(--accent-color)'; e.currentTarget.style.color = 'black'; }}
+              onMouseOut={e => { e.currentTarget.style.backgroundColor = 'rgba(255,255,255,0.1)'; e.currentTarget.style.color = 'white'; }}
+            >
+              <ChevronRight size={24} />
+            </div>
           </div>
         </div>
       </div>
@@ -484,14 +512,7 @@ function FirstPage({ setActiveTab, setSearchOpen }) {
                 <p style={{ marginTop: '20px', fontSize: '1.1rem', lineHeight: '1.6', color: 'var(--text-muted)' }}>Explore the breathtaking visual development and captured moments from the post-pandemic world. Every frame tells a story of survival, loss, and the beauty of nature reclaiming civilization.</p>
               </div>
               
-              <div style={{ display: 'flex', gap: '20px', marginTop: '40px' }}>
-                <div onClick={() => setGalleryIndex((galleryIndex - 1 + galleryImages.length) % galleryImages.length)} style={{ width: '100px', height: '80px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <ChevronLeft size={40} color="var(--accent-color)" />
-                </div>
-                <div onClick={() => setGalleryIndex((galleryIndex + 1) % galleryImages.length)} style={{ width: '100px', height: '80px', backgroundColor: 'rgba(255,255,255,0.05)', borderRadius: '8px', display: 'flex', justifyContent: 'center', alignItems: 'center', cursor: 'pointer', border: '1px solid rgba(255,255,255,0.1)' }}>
-                  <ChevronRight size={40} color="var(--accent-color)" />
-                </div>
-              </div>
+
 
               <div style={{ width: '100%', marginTop: '50px', borderTop: '1px solid rgba(255,255,255,0.1)', paddingTop: '30px' }}>
                 <div style={{ color: 'white', fontSize: '1.5rem', fontWeight: 'bold', marginBottom: '20px', letterSpacing: '1px' }} className="oswald-font">
@@ -710,8 +731,7 @@ const episodesData = [
   }
 ];
 
-function SecondPage({ setActiveTab, setTrailerOpen, setSearchOpen }) {
-  const [activeId, setActiveId] = useState(1);
+function SecondPage({ setActiveTab, setTrailerOpen, setSearchOpen, activeId, setActiveId }) {
   const activeEpisode = episodesData.find(ep => ep.id === activeId);
 
   return (
@@ -1286,6 +1306,7 @@ function CharactersPage({ setActiveTab, setSearchOpen }) {
 
 function App() {
   const [activeTab, setActiveTab] = useState('episodes');
+  const [activeEpisodeId, setActiveEpisodeId] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
   const [trailerOpen, setTrailerOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -1346,7 +1367,7 @@ function App() {
 
       <div style={{ position: 'relative', height: '100vh', width: '100%' }}>
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: activeTab === 'episodes' ? 1 : 0, transition: 'opacity 0.8s ease-in-out', pointerEvents: activeTab === 'episodes' ? 'auto' : 'none', zIndex: activeTab === 'episodes' ? 10 : 0 }}>
-          <SecondPage setActiveTab={setActiveTab} setTrailerOpen={setTrailerOpen} setSearchOpen={setSearchOpen} />
+          <SecondPage setActiveTab={setActiveTab} setTrailerOpen={setTrailerOpen} setSearchOpen={setSearchOpen} activeId={activeEpisodeId} setActiveId={setActiveEpisodeId} />
         </div>
         <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', opacity: activeTab === 'seasons' ? 1 : 0, transition: 'opacity 0.8s ease-in-out', pointerEvents: activeTab === 'seasons' ? 'auto' : 'none', zIndex: activeTab === 'seasons' ? 10 : 0 }}>
           <SeasonsPage setActiveTab={setActiveTab} setSearchOpen={setSearchOpen} />
@@ -1361,7 +1382,7 @@ function App() {
           <CharactersPage setActiveTab={setActiveTab} setSearchOpen={setSearchOpen} />
         </div>
       </div>
-      <FirstPage setActiveTab={setActiveTab} setSearchOpen={setSearchOpen} />
+      <FirstPage setActiveTab={setActiveTab} setSearchOpen={setSearchOpen} setActiveEpisodeId={setActiveEpisodeId} />
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
     </div>
   );
